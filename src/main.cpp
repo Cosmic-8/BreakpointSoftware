@@ -25,9 +25,15 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	sysConf::imu.reset(true);
+	pros::lcd::print(0, "Calibrating IMU");
+	
+	pros::lcd::clear_line(0);
+	pros::lcd::print(0, "IMU Calibration Complete");
+	sysConf::master.clear();
+	sysConf::master.print(0, 0, "Calibration Complete");
+	sysConf::master.print(1, 0, "System Ready")
 }
 
 /**
@@ -62,7 +68,7 @@ void competition_initialize() {}
 void autonomous() 
 {
 	//hopefully this doesn't break anything
-	
+
 	//testing 
 	drivePID driveCtl;
 	driveCtl.setPIDValues(1, 1, 1); //TUNE HERE
