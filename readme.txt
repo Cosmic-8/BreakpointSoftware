@@ -1,7 +1,7 @@
 Welcome to the Breakpoint Software repo
 Here you can find all versions of the robot software used by the Breakpoint team of 7th period
 
-For info on the algoithems in use, see the following:
+For info on the algorithms in use, see the following:
 PID: https://wiki.purduesigbots.com/software/control-algorithms/pid-controller
 Odometry: https://wiki.purduesigbots.com/software/odometry
 
