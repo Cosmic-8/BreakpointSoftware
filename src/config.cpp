@@ -9,15 +9,15 @@ namespace sysConf
      pros::Controller master(pros::E_CONTROLLER_MASTER);
 
     //drive motors and configuration. ALL VALUES HERE ARE ABSOLUTELY REQUIRED
-     pros::Motor L1 (1, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
-     pros::Motor L2 (2, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
-     pros::Motor L3 (3, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor L1 (11, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor L2 (12, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor L3 (13, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
     
-     pros::Motor R1 (4, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
-     pros::Motor R2 (5, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
-     pros::Motor R3 (6, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor R1 (14, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor R2 (15, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
+     pros::Motor R3 (16, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
 
-     pros::IMU imu (11);
+     pros::IMU imu (5);
      pros::Rotation rearEncoder(14);
 
     //-------------------
@@ -31,6 +31,4 @@ namespace sysConf
      const float leftOffset = 1;
      const float rightOffset = 1;
      const float rearOffset = 1;
-
-    //pros::adi::Button armStop = pros::adi::Button(0);
 }

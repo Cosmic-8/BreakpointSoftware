@@ -1,7 +1,7 @@
 #include "util.hpp"
 
 //* --- functions ------------------------------------
-namespace MatrixFoundations {
+namespace util {
 
     double centidegreesToRotations(double centidegrees) //* centidegrees to rotations
     {

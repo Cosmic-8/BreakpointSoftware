@@ -33,7 +33,7 @@ void initialize() {
 	pros::lcd::print(0, "IMU Calibration Complete");
 	sysConf::master.clear();
 	sysConf::master.print(0, 0, "Calibration Complete");
-	sysConf::master.print(1, 0, "System Ready")
+	sysConf::master.print(1, 0, "System Ready");
 }
 
 /**

@@ -1,8 +1,5 @@
 #include "softwareSubsystems/odometry2.hpp"
-#include "util.hpp"
-#include "pros/rtos.hpp"
-#include <iostream>
-#include <ostream>
+
 softwareSubsystems::odometryV2* softwareSubsystems::odometryV2::odometryV2_ptr = nullptr;
 
 //* math from M_PIlons doc: https://wiki.purduesigbots.com/software/odometry

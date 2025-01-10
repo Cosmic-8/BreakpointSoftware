@@ -1,5 +1,4 @@
 #include "motion.hpp"
-#include "pros/motors.h"
 
 bool keepPositionTask = false;
 
