@@ -27,13 +27,13 @@ void initialize() {
 	pros::lcd::initialize();
 
 	sysConf::imu.reset(true);
-	pros::lcd::print(0, "Calibrating IMU");
+	pros::lcd::print(1, "Calibrating IMU");
 	
-	pros::lcd::clear_line(0);
-	pros::lcd::print(0, "IMU Calibration Complete");
+	pros::lcd::clear_line(1);
+	pros::lcd::print(1, "IMU Calibration Complete");
 	sysConf::master.clear();
-	sysConf::master.print(0, 0, "Calibration Complete");
-	sysConf::master.print(1, 0, "System Ready");
+	sysConf::master.print(1, 1, "Calibration Complete");
+	sysConf::master.print(2, 1, "System Ready");
 }
 
 /**
@@ -72,7 +72,7 @@ void autonomous()
 	//testing 
 	drivePID driveCtl;
 	driveCtl.setPIDValues(1, 1, 1); //TUNE HERE
-	driveCtl.setTurnPIDValues(1, 1, 1);
+	driveCtl.setTurnPIDValues(1, 1, 1); //and here
 
 	driveCtl.move(12); //should theoretically move 1 foot
 	pros::delay(100);
@@ -96,6 +96,7 @@ void autonomous()
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	
+	//TEMPORARY! ENABLE FOR TESTING
+	//autonomous();
 	std::cout << "Program end" << std::endl;
 }
