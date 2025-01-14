@@ -59,7 +59,17 @@ softwareSubsystems::odometryV2* softwareSubsystems::odometryV2::odometryV2_ptr =
             startingTheta = util::degreesToRadians(startingHeading);
             printf("Starting theta: %f", startingTheta);
             
-            sysConf::imu.set_heading(startingHeading);
+            //this->trackingMode = headingTrackingMode;
+
+            std::cout << "Using " << trackingMode << "for heading tracking" << std::endl;
+            
+            if(trackingMode == OdometryHeadingMode::IMU_GYRO)
+            {
+                sysConf::imu.set_heading(startingHeading);
+            }
+            
+
+            
 
             if (_odometryLogging)
                 printf("Left encoder centidegrees: %f, Right encoder centidegrees: %f, Back encoder centidegrees: %f, Diameter: %f, Left from center: %f, Right from center: %f, Back from center: %f\n", localDriveSys.getLeftPosRaw(), localDriveSys.getRightPosRaw(), sysConf::rearEncoder.get_position(), sysConf::wheelDiam, sysConf::leftOffset, sysConf::rightOffset, sysConf::rearOffset);
@@ -100,7 +110,7 @@ softwareSubsystems::odometryV2* softwareSubsystems::odometryV2::odometryV2_ptr =
                         currentTheta = (startingTheta + ((totalL - totalR) / sysConf::leftOffset + sysConf::rightOffset));
                         // // pros::lcd::print(1, "%f - ((%f - %f)/(%f + %f))", startingTheta, totalL, totalR, odomStruct.leftFromCenter, odomStruct.rightFromCenter);
 
-                        currentTheta = util::wrapRadians(currentTheta);
+                        currentTheta = util::wrapRadians(currentTheta); //prevent theta runaway
 
                         if (_showOdomMath) {
                             printf("Currenttheta = %f + ((%f + %f) / (%f + %f)) = %f\n", startingTheta, totalL, totalR, sysConf::leftOffset, sysConf::rightOffset, currentTheta);

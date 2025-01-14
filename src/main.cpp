@@ -7,12 +7,16 @@
  * When this callback is fired, it will toggle line 2 of the LCD text between
  * "I was pressed!" and nothing.
  */
-void on_center_button() {
+void on_center_button()
+{
 	static bool pressed = false;
 	pressed = !pressed;
-	if (pressed) {
+	if (pressed)
+	{
 		pros::lcd::set_text(2, "I was pressed!");
-	} else {
+	}
+	else
+	{
 		pros::lcd::clear_line(2);
 	}
 }
@@ -23,17 +27,27 @@ void on_center_button() {
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
-void initialize() {
+void initialize()
+{
 	pros::lcd::initialize();
 
 	sysConf::imu.reset(true);
 	pros::lcd::print(1, "Calibrating IMU");
-	
+
 	pros::lcd::clear_line(1);
 	pros::lcd::print(1, "IMU Calibration Complete");
 	sysConf::master.clear();
 	sysConf::master.print(1, 1, "Calibration Complete");
 	sysConf::master.print(2, 1, "System Ready");
+
+	//startup odometry subsystem
+	softwareSubsystems::odometryV2* odom = softwareSubsystems::odometryV2::getInstance();
+	
+	odom->resetAll();
+	odom->setup(0,0,0); //set starting location/offset here
+
+	odom->trackPosition(); //start background process
+	
 }
 
 /**
@@ -65,21 +79,21 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() 
+void autonomous()
 {
-	//hopefully this doesn't break anything
+	// hopefully this doesn't break anything
 
-	//testing 
+	// testing
 	drivePID driveCtl;
-	driveCtl.setPIDValues(1, 1, 1); //TUNE HERE
-	driveCtl.setTurnPIDValues(1, 1, 1); //and here
+	driveCtl.setPIDValues(1, 0, 0);		// TUNE HERE
+	driveCtl.setTurnPIDValues(1, 0, 0); // and here
 
-	driveCtl.move(12); //should theoretically move 1 foot
+	driveCtl.move(12); // should theoretically move 1 foot
 	pros::delay(100);
-	driveCtl.turnTo(90); //should turn 90 degrees
+	driveCtl.turnTo(90); // should turn 90 degrees
 
-	//this DEFINITELY doesn't work anymore but might try anyway
-	//driveCtl.triangleToPoint(10, 10); //should go 10 in left and 10 in forward
+	// this DEFINITELY doesn't work anymore but might try anyway
+	// driveCtl.triangleToPoint(10, 10); //should go 10 in left and 10 in forward
 }
 
 /**
@@ -95,8 +109,27 @@ void autonomous()
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void opcontrol() {
-	//TEMPORARY! ENABLE FOR TESTING
-	//autonomous();
+void opcontrol()
+{
+	// TEMPORARY! ENABLE FOR TESTING
+	// autonomous();
+	
+	float y = sysConf::master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+	float rot = sysConf::master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+	while (true)
+	{
+		y = sysConf::master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+		rot = sysConf::master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+		/* code */
+		sysConf::L1.move_voltage(y + rot);
+		sysConf::L2.move_voltage(y + rot);
+		sysConf::L3.move_voltage(y + rot);
+
+		sysConf::R1.move_voltage(y - rot);
+		sysConf::R2.move_voltage(y - rot);
+		sysConf::R3.move_voltage(y - rot);
+	}
+	
 	std::cout << "Program end" << std::endl;
 }

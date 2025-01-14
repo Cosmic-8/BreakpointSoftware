@@ -1,12 +1,13 @@
 #ifndef CONFIG
 #define CONFIG
 
-#define _generalDebug false
-#define _PIDdebug false
+#define _generalDebug true
+#define _PIDdebug true
 #define _odometryLogging false
 #define _showOdomMath false
 
 #include "api.h"
+
 
 //System configuration file. Include all device declarations here EXCEPT ADI devices as those do not work for some reason
 //This system will likely be replaced with a HAL in the near future.

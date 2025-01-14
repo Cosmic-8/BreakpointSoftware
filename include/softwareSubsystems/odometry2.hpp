@@ -7,6 +7,9 @@
 
         class odometryV2 {
 
+        public:
+            enum OdometryHeadingMode{IMU_GYRO, AUX_TRACKING};
+
         private:
             float diameter;
 
@@ -49,6 +52,9 @@
             double globalPosY;
             double currentTheta;
 
+            OdometryHeadingMode trackingMode;
+            
+
             //tells weather or not odometry has been setup
             bool isSetup = false;
 
@@ -61,6 +67,7 @@
             static odometryV2* odometryV2_ptr;
 
         public:
+
             bool trackingInProgress;
             
             static odometryV2* getInstance();

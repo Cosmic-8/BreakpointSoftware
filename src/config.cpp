@@ -18,7 +18,7 @@ namespace sysConf
      pros::Motor R3 (16, pros::v5::MotorGear::blue, pros::v5::MotorEncoderUnits::rotations);
 
      pros::IMU imu (5);
-     pros::Rotation rearEncoder(14);
+     pros::Rotation rearEncoder(20);
 
     //-------------------
     //values for odometry
@@ -28,7 +28,7 @@ namespace sysConf
      const float rearEncoderWheelDiam = 2;
 
     //offsets from COR for encoder ground contact
-     const float leftOffset = 1;
-     const float rightOffset = 1;
-     const float rearOffset = 1;
+     const float leftOffset = 7.5;
+     const float rightOffset = 7.5;
+     const float rearOffset = 4;
 }
