@@ -1,5 +1,6 @@
 #include "main.h"
 #include "config.hpp"
+#include "pros/rtos.hpp"
 #include "teleop.hpp"
 /**
  * A callback function for LLEMU's center button.
@@ -30,14 +31,14 @@ void on_center_button()
 void initialize()
 {
 	pros::lcd::initialize();
-
-	sysConf::imu.reset(true);
+	pros::delay(500);
 	pros::lcd::print(1, "Calibrating IMU");
+	sysConf::imu.reset(true);
 
-	pros::lcd::clear_line(1);
-	pros::lcd::print(1, "IMU Calibration Complete");
+	pros::lcd::print(2, "IMU Calibration Complete");
 	sysConf::master.clear();
 	sysConf::master.print(1, 1, "Calibration Complete");
+	pros::delay(550);
 	sysConf::master.print(2, 1, "System Ready");
 
 	//startup odometry subsystem
