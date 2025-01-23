@@ -25,8 +25,7 @@ softwareSubsystems::odometryV2* softwareSubsystems::odometryV2::odometryV2_ptr =
         odometryV2* odometryV2::getInstance()
         {
             //lock context switcher
-            pros::Mutex mutex;
-            mutex.take();
+            
 
             if(odometryV2_ptr == nullptr)
             {
@@ -43,7 +42,6 @@ softwareSubsystems::odometryV2* softwareSubsystems::odometryV2::odometryV2_ptr =
             
 
             //unlock context switching
-            mutex.give();
         }
 
         double startingTheta;

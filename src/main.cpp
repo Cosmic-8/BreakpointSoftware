@@ -37,24 +37,24 @@ void initialize()
 
 	pros::lcd::print(2, "IMU Calibration Complete");
 	sysConf::master.clear();
-	sysConf::master.print(1, 1, "Calibration Complete");
-	pros::delay(550);
-	sysConf::master.print(2, 1, "System Ready");
+	sysConf::master.print(0, 1, "System Ready");
 
-	//startup odometry subsystem
-	softwareSubsystems::odometryV2* odom = softwareSubsystems::odometryV2::getInstance();
+
+	std::cout << "Attempting Odom Init" << std::endl;
+	// //startup odometry subsystem
+	// softwareSubsystems::odometryV2* odom = softwareSubsystems::odometryV2::getInstance();
 	
-	odom->resetAll();
-	odom->setup(0,0,0); //set starting location/offset here
+	// odom->resetAll();
+	// odom->setup(0,0,0); //set starting location/offset here
 
-	odom->trackPosition(); //start background process
+	// odom->trackPosition(); //start background process
 	
 }
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
- * the robot is enabled, this task will exit.
+ * the robot is enabled, this task wilprosl exit.
  */
 void disabled() {}
 
@@ -112,6 +112,7 @@ void autonomous()
  */
 void opcontrol()
 {
+	std::cout << "Teleop start" << std::endl;
 	// TEMPORARY! ENABLE FOR TESTING
 	// autonomous();
 	
